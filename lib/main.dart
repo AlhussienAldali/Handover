@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:handover/core/notifications/notification_service.dart';
 import 'core/app/app.dart';
-import 'core/dependency_injection/di.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  configureInjection();
+
+  NotificationService.init();
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
