@@ -8,7 +8,6 @@ import 'package:handover/features/delivery_tracker/widgets/delivery_time_line.da
 import 'package:handover/features/simulation/movement_simulation.dart';
 import 'package:handover/features/simulation/notification_simulation.dart';
 import 'package:provider/provider.dart';
-import 'package:workmanager/workmanager.dart';
 
 class DeliveryMap extends StatefulWidget {
   const DeliveryMap({Key? key}) : super(key: key);
@@ -31,25 +30,10 @@ class _DeliveryMapState extends State<DeliveryMap> {
   @override
   void initState() {
     setUpMarker();
-
     //simulate the notification in the background
+
     WidgetsBinding.instance?.addPostFrameCallback((_) async {
-      Workmanager().initialize(callbackDispatcher);
-      await Workmanager().registerOneOffTask("taskZero", "Notification",
-          inputData: {"notificationNumber": 0},
-          initialDelay: const Duration(seconds: nearPickUpNotificationTime));
-      await Workmanager().registerOneOffTask("taskOne", "Notification",
-          inputData: {"notificationNumber": 1},
-          initialDelay:
-              const Duration(seconds: arrivedToPickUpNotificationTime));
-      await Workmanager().registerOneOffTask("taskTwo", "Notification",
-          inputData: {"notificationNumber": 2},
-          initialDelay:
-              const Duration(seconds: nearDeliveryDestinationNotificationTime));
-      await Workmanager().registerOneOffTask("taskThree", "Notification",
-          inputData: {"notificationNumber": 3},
-          initialDelay: const Duration(
-              seconds: arrivedToDeliveryDestinationNotificationTime));
+      await simulateNotifications();
     });
 
     //simulate the movement of the driver from his location to pick up location

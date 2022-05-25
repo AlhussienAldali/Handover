@@ -1,4 +1,6 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
   //Singleton pattern
@@ -30,5 +32,39 @@ class NotificationService {
         onSelectNotification: (String? payload) async {
       if (payload != null) {}
     });
+
+
+  }
+
+  static void initTimeZones(){
+    tz.initializeTimeZones();
+  }
+
+  static Future<void> showNotification(
+      int id, String title, String body, int duration) async {
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
+      '0',
+      'deliveryNotifications',
+      importance: Importance.max,
+      priority: Priority.high,
+      ticker: 'ticker',
+    );
+    const IOSNotificationDetails iosNotificationDetails =
+        IOSNotificationDetails();
+    const NotificationDetails platformChannelSpecifics = NotificationDetails(
+        android: androidPlatformChannelSpecifics, iOS: iosNotificationDetails);
+    await NotificationService.flutterLocalNotificationsPlugin.zonedSchedule(
+      id,
+      title,
+      body,
+      tz.TZDateTime.now(tz.local).add(Duration(seconds: duration)),
+      platformChannelSpecifics,
+      // Type of time interpretation
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+      androidAllowWhileIdle:
+          true, //To show notification even when the app is closed
+    );
   }
 }

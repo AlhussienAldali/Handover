@@ -1,22 +1,26 @@
-import 'package:handover/core/notifications/notifications.dart';
-import 'package:workmanager/workmanager.dart';
+import 'package:handover/core/notifications/notification_service.dart';
+import 'package:handover/core/ui_and_statics/app_strings.dart';
 
-void callbackDispatcher() {
-  Workmanager().executeTask((taskName, inputData) {
-    if (inputData!["notificationNumber"] == 0) {
-      Notifications.showNearPickUpNotification();
-    }
-    if (inputData["notificationNumber"] == 1) {
-      Notifications.showArrivedToPickUpNotification();
-    }
-    if (inputData["notificationNumber"] == 2) {
-      Notifications.showNearDeliveryDestinationNotification();
-    }
-    if (inputData["notificationNumber"] == 3) {
-      Notifications.showArrivedToDeliveryDestinationNotification();
-    }
-    return Future.value(true);
-  });
+Future<void> simulateNotifications() async {
+  NotificationService.initTimeZones();
+
+  await NotificationService.showNotification(0, AppStrings.notificationsTitle,
+      'The driver is near pick up point', nearPickUpNotificationTime);
+  await NotificationService.showNotification(
+      1,
+      AppStrings.notificationsTitle,
+      'The driver is near Delivery point, get ready please',
+      arrivedToPickUpNotificationTime);
+  await NotificationService.showNotification(
+      2,
+      AppStrings.notificationsTitle,
+      'The driver is near Delivery point, get ready please',
+      nearDeliveryDestinationNotificationTime);
+  await NotificationService.showNotification(
+      3,
+      AppStrings.notificationsTitle,
+      'The driver has arrived to delivery point',
+      arrivedToDeliveryDestinationNotificationTime);
 }
 
 const int nearPickUpNotificationTime = 27;
