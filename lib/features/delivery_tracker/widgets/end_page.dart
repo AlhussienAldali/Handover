@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:handover/core/ui_and_statics/app_strings.dart';
 import 'package:handover/core/ui_and_statics/dimensions.dart';
 
 class EndPage extends StatelessWidget {
@@ -16,7 +17,7 @@ class EndPage extends StatelessWidget {
             backgroundColor: Colors.transparent,
           ),
           const Text(
-            "you have to accept me in your team hehe, because I look like the cat in the picture after I finished the test",
+            AppStrings.endPageText,
             style: TextStyle(fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           )

@@ -5,25 +5,22 @@ Future<void> simulateNotifications() async {
   NotificationService.initTimeZones();
 
   await NotificationService.showNotification(0, AppStrings.notificationsTitle,
-      'The driver is near pick up point', nearPickUpNotificationTime);
-  await NotificationService.showNotification(
-      1,
-      AppStrings.notificationsTitle,
-      'The driver is near Delivery point, get ready please',
-      arrivedToPickUpNotificationTime);
+      AppStrings.onTheWayBody, nearPickUpNotificationTime);
+  await NotificationService.showNotification(1, AppStrings.notificationsTitle,
+      AppStrings.pickedUpDeliveryBody, arrivedToPickUpNotificationTime);
   await NotificationService.showNotification(
       2,
       AppStrings.notificationsTitle,
-      'The driver is near Delivery point, get ready please',
+      AppStrings.nearDeliveryDestinationBody,
       nearDeliveryDestinationNotificationTime);
   await NotificationService.showNotification(
       3,
       AppStrings.notificationsTitle,
-      'The driver has arrived to delivery point',
+      AppStrings.deliveredPackageBody,
       arrivedToDeliveryDestinationNotificationTime);
 }
 
 const int nearPickUpNotificationTime = 27;
 const int arrivedToPickUpNotificationTime = 34;
 const int nearDeliveryDestinationNotificationTime = 65;
-const int arrivedToDeliveryDestinationNotificationTime = 68;
+const int arrivedToDeliveryDestinationNotificationTime = 70;

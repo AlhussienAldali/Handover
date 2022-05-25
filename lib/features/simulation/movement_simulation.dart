@@ -54,7 +54,7 @@ simulateMarkerMovement(
         markerId: const MarkerId("driverMarker"),
         position: newPos,
         icon: BitmapDescriptor.fromBytes(
-            await getBytesFromAsset('assets/icons/driver.png', 40)),
+            await getBytesFromAsset('assets/icons/driver.png', 65)),
         draggable: false);
     _markers.add(newMarker);
     mapMarkerSink.add(_markers);

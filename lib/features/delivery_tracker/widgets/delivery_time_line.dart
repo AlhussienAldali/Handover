@@ -87,9 +87,12 @@ class DeliveryTimeLine extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20, right: 20)),
       endChild: Container(
         padding: EdgeInsets.only(
-            top: done ? Dimensions.smallPadding : Dimensions.smallPadding + 10,
-            bottom:
-                done ? Dimensions.smallPadding : Dimensions.smallPadding + 10),
+            top: done
+                ? Dimensions.timeLinePadding
+                : Dimensions.timeLinePadding + 10,
+            bottom: done
+                ? Dimensions.timeLinePadding
+                : Dimensions.timeLinePadding + 10),
         child: Text(
           text,
           style: TextStyle(color: done ? AppColors.black : AppColors.white),

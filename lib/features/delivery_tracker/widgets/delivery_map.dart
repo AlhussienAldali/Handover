@@ -109,14 +109,14 @@ class _DeliveryMapState extends State<DeliveryMap> {
       position: LatLng(MapStatics.pickUpLocation.target.latitude,
           MapStatics.pickUpLocation.target.longitude),
       icon: BitmapDescriptor.fromBytes(
-          await getBytesFromAsset('assets/icons/pickup.png', 50)),
+          await getBytesFromAsset('assets/icons/pickup.png', 75)),
     );
     final destinationMarker = Marker(
       markerId: const MarkerId("destinationMarker"),
       position: LatLng(MapStatics.destinationLocation.target.latitude,
           MapStatics.destinationLocation.target.longitude),
       icon: BitmapDescriptor.fromBytes(
-          await getBytesFromAsset('assets/icons/destination.png', 50)),
+          await getBytesFromAsset('assets/icons/destination.png', 75)),
     );
 
     //Adding a delay and then showing the marker on screen

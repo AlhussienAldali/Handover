@@ -20,16 +20,31 @@ class DeliveryInfo extends StatelessWidget {
         clipBehavior: Clip.none,
         alignment: Alignment.center,
         children: [
-          Provider.of<MapProvider>(context, listen: true).deliveryStage !=
+          Provider.of<MapProvider>(
+                    context,
+                    listen: true,
+                  ).deliveryStage !=
                   DeliveryStage.done
               ? buildSmallMenu(context)
               : buildLongMenu(context),
           Positioned(
-            top: -Dimensions.profileRadios!,
-            child: CircleAvatar(
-              radius: Dimensions.profileRadios,
-              backgroundImage: const AssetImage("assets/profile.png"),
-              backgroundColor: Colors.transparent,
+            top: -Dimensions.profileRadios,
+            child: Container(
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                      offset: Offset(0.0, 10),
+                      blurRadius: 10,
+                      color: Colors.black26,
+                      spreadRadius: 1)
+                ],
+              ),
+              child: CircleAvatar(
+                radius: Dimensions.profileRadios,
+                backgroundImage: const AssetImage("assets/profile.png"),
+                backgroundColor: Colors.transparent,
+              ),
             ),
           ),
         ],
@@ -39,7 +54,7 @@ class DeliveryInfo extends StatelessWidget {
 
   Container buildLongMenu(context) {
     return Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
             color: AppColors.darkYellow,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(Dimensions.mainScreenContainerRadios),
@@ -48,7 +63,7 @@ class DeliveryInfo extends StatelessWidget {
         height: Dimensions.mainScreenBigBarHeight,
         width: Dimensions.mainScreenBarWidth,
         child: Padding(
-          padding: EdgeInsets.only(top: Dimensions.profileRadios!),
+          padding: EdgeInsets.only(top: Dimensions.profileNamePadding),
           child: Column(
             children: [
               const Text(
@@ -56,11 +71,11 @@ class DeliveryInfo extends StatelessWidget {
                 style: TextStyle(
                     color: AppColors.black, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(
-                height: Dimensions.mainPadding * 1.5,
+              SizedBox(
+                height: Dimensions.mainPadding * 1.25,
               ),
               Padding(
-                padding: const EdgeInsets.only(
+                padding: EdgeInsets.only(
                     left: Dimensions.mainPadding,
                     right: Dimensions.mainPadding),
                 child: Column(
@@ -71,7 +86,7 @@ class DeliveryInfo extends StatelessWidget {
                       direction: Axis.horizontal,
                       allowHalfRating: false,
                       itemCount: 5,
-                      itemSize: 40,
+                      itemSize: Dimensions.ratingIconSize,
                       itemPadding: const EdgeInsets.symmetric(horizontal: 9.0),
                       itemBuilder: (context, _) => const Icon(
                         Icons.star,
@@ -83,19 +98,19 @@ class DeliveryInfo extends StatelessWidget {
                         }
                       },
                     ),
-                    const SizedBox(
-                      height: Dimensions.mainPadding * 1.5,
+                    SizedBox(
+                      height: Dimensions.mainPadding * 1.75,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(AppStrings.pickedUpTime,
+                          children: [
+                            const Text(AppStrings.pickedUpTime,
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             SizedBox(height: Dimensions.smallPadding),
-                            Text(AppStrings.deliveredTime,
+                            const Text(AppStrings.deliveredTime,
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                           ],
                         ),
@@ -108,7 +123,7 @@ class DeliveryInfo extends StatelessWidget {
                                         .pickUpTime!),
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold)),
-                            const SizedBox(height: Dimensions.smallPadding),
+                            SizedBox(height: Dimensions.smallPadding),
                             Text(
                                 DateFormat('hh:mm a').format(
                                     Provider.of<MapProvider>(context,
@@ -120,7 +135,7 @@ class DeliveryInfo extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: Dimensions.mediumPadding),
+                    SizedBox(height: Dimensions.mediumPadding),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: const [
@@ -130,7 +145,7 @@ class DeliveryInfo extends StatelessWidget {
                             )),
                       ],
                     ),
-                    const SizedBox(height: Dimensions.smallPadding),
+                    SizedBox(height: Dimensions.smallPadding),
                   ],
                 ),
               ),
@@ -138,10 +153,10 @@ class DeliveryInfo extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
-                    children: const [
+                    children: [
                       Padding(
                         padding: EdgeInsets.only(left: Dimensions.mainPadding),
-                        child: Text(AppStrings.price,
+                        child: const Text(AppStrings.price,
                             style: TextStyle(fontWeight: FontWeight.bold)),
                       ),
                     ],
@@ -153,7 +168,7 @@ class DeliveryInfo extends StatelessWidget {
                     child: Container(
                       width: Dimensions.submitWidth,
                       height: Dimensions.submitHeight,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                           color: AppColors.white,
                           borderRadius: BorderRadius.only(
                               topLeft:
@@ -162,8 +177,11 @@ class DeliveryInfo extends StatelessWidget {
                                   Radius.circular(Dimensions.submitRounded))),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: const [
-                          Text(AppStrings.submit),
+                        children: [
+                          const Text(
+                            AppStrings.submit,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           Icon(
                             Icons.arrow_right_alt,
                             size: Dimensions.iconSize,
@@ -181,7 +199,7 @@ class DeliveryInfo extends StatelessWidget {
 
   Container buildSmallMenu(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           color: AppColors.darkYellow,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(Dimensions.mainScreenContainerRadios),
@@ -189,20 +207,22 @@ class DeliveryInfo extends StatelessWidget {
       height: Dimensions.mainScreenBarHeight,
       width: Dimensions.mainScreenBarWidth,
       child: Padding(
-        padding: EdgeInsets.only(top: Dimensions.profileRadios!),
+        padding: EdgeInsets.only(top: Dimensions.profileRadios),
         child: Column(
           children: [
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(Dimensions.smallPadding),
-              child: Text(
+              child: const Text(
                 AppStrings.profileName,
                 style: TextStyle(
                     color: AppColors.black, fontWeight: FontWeight.bold),
               ),
             ),
             DeliveryTimeLine(
-              deliveryStage:
-                  Provider.of<MapProvider>(context, listen: true).deliveryStage,
+              deliveryStage: Provider.of<MapProvider>(
+                context,
+                listen: true,
+              ).deliveryStage,
             )
           ],
         ),

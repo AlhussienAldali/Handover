@@ -32,11 +32,9 @@ class NotificationService {
         onSelectNotification: (String? payload) async {
       if (payload != null) {}
     });
-
-
   }
 
-  static void initTimeZones(){
+  static void initTimeZones() {
     tz.initializeTimeZones();
   }
 
